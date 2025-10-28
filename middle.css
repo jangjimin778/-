@@ -1,0 +1,394 @@
+.poster {
+  width: 1920px;
+  height: 1080px;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* 프레임 이미지 세팅 */
+.text-group {
+  text-align: center;
+}
+
+.title-text /*스누피컴홈개큰거*/ {
+  position: absolute;
+  transform: translate(-50%, 0%);
+  top: 320px;
+  left: 510px;
+  font-family: "Suez One", serif;
+  font-size: 180px;
+  line-height: 140px;
+  color: #002a91;
+  text-align: center;
+  animation: fadeDown 1.2s ease-out forwards;
+}
+.title-text2 /*어쩌고저쩌고긴검은글자*/ {
+  position: absolute;
+  transform: translate(-50%, 0%);
+  left: 510px;
+  top: 575px;
+  width: none;
+  font-family: "Snoopy", serif;
+  font-size: 32px;
+  line-height: 41px;
+  letter-spacing: 0.5px;
+  color: #001636;
+  z-index: 1;
+  white-space: nowrap;
+  text-align: center;
+}
+@keyframes fadeDown {
+  0% {
+    transform: translate(-50%, -50%) translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(0);
+    opacity: 1;
+  }
+}
+.title-text3 {
+  position: absolute;
+  transform: translate(-50%, 0%);
+  left: 510px;
+  top: 890px;
+  width: none;
+  font-family: "Snoopy", serif;
+  font-size: 110px;
+  font-weight: 700;
+  line-height: 41px;
+  letter-spacing: 0.5px;
+  color: #df454f;
+  z-index: 1;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/*오른쪽 그림영역*/
+body {
+  margin: 0;
+  background: #fff;
+  height: 100vh;
+}
+
+/* 회전 배경 컨테이너 */
+.spin-wrap {
+  position: absolute;
+  top: 150px;
+  left: 1000px;
+  width: 800px;
+  height: 800px;
+  overflow: visible;
+  z-index: 2;
+}
+
+.spin-bg {
+  width: 100%;
+  height: 100%;
+  animation: spin 27s linear infinite;
+  transform-origin: center center;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.snoopy-body {
+  position: absolute;
+  width: 600px;
+  right: -110px;
+  top: 30%;
+  transform: translate(-50%, -45%);
+  z-index: 4;
+}
+
+.hip {
+  position: absolute;
+  left: 28%;
+  top: 62%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  pointer-events: none;
+  z-index: 3;
+  overflow: visible;
+}
+
+.foot {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 200px;
+  pointer-events: none;
+  z-index: 3;
+
+  transform-origin: 50% 8%;
+  animation: swing 0.85s ease-in-out infinite alternate;
+}
+
+.foot1 {
+  --ox: -30%;
+  --oy: 0%;
+  --dx: 0px;
+  --dy: -60px;
+  --base: 0deg;
+}
+
+.foot2 {
+  --ox: 10%;
+  --oy: 0%;
+  --dx: 10px;
+  --dy: -60px;
+  --base: 0deg;
+  animation-delay: 2.7s;
+}
+
+@keyframes swing {
+  0% {
+    transform: translate(calc(-50% + var(--dx)), var(--dy))
+      rotate(calc(var(--base) - 10deg));
+  }
+  100% {
+    transform: translate(calc(-50% + var(--dx)), var(--dy))
+      rotate(calc(var(--base) + 30deg));
+  }
+}
+.snoopybag {
+  position: absolute;
+  top: -20px;
+  right: 280px;
+  width: 180px;
+  height: auto;
+  z-index: 5;
+
+  transform-origin: 35% 35%;
+
+  animation: bagSwing 0.85s ease-in-out infinite alternate;
+}
+
+@keyframes bagSwing {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(8deg);
+  }
+}
+.woodstock {
+  position: absolute;
+
+  left: 44%;
+  top: 63%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  z-index: 4;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.wood-body {
+  position: absolute;
+  left: 130%;
+  top: 0%;
+  width: 130px;
+  transform: translate(-50%, -50%);
+  image-rendering: auto;
+  z-index: 3;
+}
+.wood-hip {
+  position: absolute;
+  left: 52%;
+  top: 76%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  pointer-events: none;
+  z-index: 2;
+  overflow: visible;
+}
+
+.wood-foot {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 45px;
+  transform: translateX(-50%);
+  transform-origin: 50% 10%;
+  pointer-events: none;
+  z-index: 2;
+  animation: woodSwing 0.8s ease-in-out infinite;
+}
+
+.wood-foot1 {
+  --dx: 85px;
+  --dy: -15px;
+  --base: 20deg;
+  --amp: 40deg;
+  animation-delay: 0s;
+}
+.wood-foot2 {
+  --dx: 90px;
+  --dy: -15px;
+  --base: -18deg;
+  --amp: 30deg;
+  animation-delay: 0.5s;
+}
+
+@keyframes woodSwing {
+  0% {
+    transform: translate(calc(-50% + var(--dx)), var(--dy))
+      rotate(calc(var(--base) - var(--amp)));
+  }
+  50% {
+    transform: translate(calc(-50% + var(--dx)), var(--dy))
+      rotate(calc(var(--base) + var(--amp)));
+  }
+  100% {
+    transform: translate(calc(-50% + var(--dx)), var(--dy))
+      rotate(calc(var(--base) - var(--amp)));
+  }
+}
+.wood-tail {
+  position: absolute;
+
+  right: -130px;
+  top: -10px;
+  width: 40px;
+
+  transform-origin: 20% 80%;
+
+  --dx: -3px;
+  --dy: -3px;
+  --base: 15deg;
+  --ampY: 6px;
+  --ampR: 6deg;
+
+  animation: tailWiggle 0.45s ease-in-out infinite;
+  z-index: 5;
+  pointer-events: none;
+}
+
+@keyframes tailWiggle {
+  0% {
+    transform: translate(
+        calc(-50% + var(--dx)),
+        calc(-50% + var(--dy) - var(--ampY))
+      )
+      rotate(calc(var(--base) - var(--ampR)));
+  }
+  50% {
+    transform: translate(
+        calc(-50% + var(--dx)),
+        calc(-50% + var(--dy) + var(--ampY))
+      )
+      rotate(calc(var(--base) + var(--ampR)));
+  }
+  100% {
+    transform: translate(
+        calc(-50% + var(--dx)),
+        calc(-50% + var(--dy) - var(--ampY))
+      )
+      rotate(calc(var(--base) - var(--ampR)));
+  }
+}
+.shadow {
+  position: absolute;
+  height: 30px;
+  width: 530px;
+  right: -670px;
+  z-index: 1;
+  opacity: 0.6;
+  top: 65px;
+  border-radius: 50%;
+  animation: shadowStretch 1.7s ease-in-out infinite;
+  animation-delay: 0.85s;
+  transform-origin: center center;
+}
+@keyframes shadowStretch {
+  0% {
+    transform: translateX(-50%) scaleX(1);
+  }
+  50% {
+    transform: translateX(-50%) scaleX(1.2);
+  }
+  100% {
+    transform: translateX(-50%) scaleX(1);
+  }
+}
+.profile {
+  position: absolute;
+  top: 730px;
+  right: 700px;
+
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  overflow: visible;
+  z-index: 60;
+}
+
+.profile img {
+  height: 200px;
+  width: auto;
+  object-fit: contain;
+
+  transform-origin: center bottom;
+  transition: transform 0.25s ease, filter 0.25s ease;
+  will-change: transform;
+}
+
+.profile img:hover {
+  transform: scale(1.3) rotate(5deg);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
+  z-index: 1;
+}
+
+.profile img:focus-visible {
+  outline: 2px solid #002a91;
+  outline-offset: 2px;
+}
+.woodstockintro {
+  position: absolute;
+
+  left: 62%;
+  top: 43%;
+  width: 200px;
+  height: auto;
+
+  z-index: 3;
+  pointer-events: none;
+  opacity: 1;
+}
+.snoopy-hat {
+  position: absolute;
+  left: 20%;
+  top: 10%;
+  width: 230px;
+  z-index: 4;
+  pointer-events: none;
+
+  transform-origin: 60% 90%;
+
+  --base: 15deg;
+
+  animation: hatWobble 1.2s ease-in-out infinite;
+}
+
+@keyframes hatWobble {
+  0% {
+    transform: rotate(calc(var(--base) - 8deg));
+  }
+  50% {
+    transform: rotate(calc(var(--base) + 8deg));
+  }
+  100% {
+    transform: rotate(calc(var(--base) - 8deg));
+  }
+}

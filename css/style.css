@@ -1,0 +1,444 @@
+/* 전체 페이지 기본 설정 */
+
+/* 포스터 캔버스 영역 */
+.poster {
+  width: 1920px;
+  height: 1080px;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* 프레임 이미지 세팅 */
+.text-group {
+  text-align: center;
+}
+
+.title-text /*스누피컴홈개큰거*/ {
+  position: absolute;
+  transform: translate(-50%, 0%);
+  top: 320px; /* 임의 배치 */
+  left: 510px; /* 임의 배치 */
+  font-family: "Suez One", serif;
+  font-size: 180px;
+  line-height: 140px;
+  color: #002a91;
+  text-align: center;
+  animation: fadeDown 1.2s ease-out forwards;
+}
+.title-text2 /*어쩌고저쩌고긴검은글자*/ {
+  position: absolute;
+  transform: translate(-50%, 0%);
+  left: 510px; /* 임의 좌표 – 나중에 맞추면 됨 */
+  top: 575px; /* 임의 좌표 – 포스터 내부에 보이도록 */
+  width: none; /* 줄바꿈을 위한 폭 */
+  font-family: "Snoopy", serif; /* 필요 시 다른 폰트로 */
+  font-size: 32px;
+  line-height: 41px;
+  letter-spacing: 0.5px;
+  color: #001636;
+  z-index: 1; /* 이미지 위로 */
+  white-space: nowrap; /* <br> 반영 */
+  text-align: center;
+}
+@keyframes fadeDown {
+  0% {
+    transform: translate(-50%, -50%) translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(0);
+    opacity: 1;
+  }
+}
+.title-text3 {
+  position: absolute;
+  transform: translate(-50%, 0%);
+  left: 510px; /* 임의 좌표 – 나중에 맞추면 됨 */
+  top: 890px; /* 임의 좌표 – 포스터 내부에 보이도록 */
+  width: none; /* 줄바꿈을 위한 폭 */
+  font-family: "Snoopy", serif; /* 필요 시 다른 폰트로 */
+  font-size: 110px;
+  font-weight: 700;
+  line-height: 41px;
+  letter-spacing: 0.5px;
+  color: #df454f;
+  z-index: 1; /* 이미지 위로 */
+  white-space: nowrap; /* <br> 반영 */
+  text-align: center;
+}
+
+/*오른쪽 그림영역*/
+body {
+  margin: 0;
+  background: #fff;
+  height: 100vh;
+}
+
+/* 회전 배경 컨테이너 */
+.spin-wrap {
+  position: absolute;
+  top: 150px; /* 임의 위치 */
+  left: 1000px; /* 임의 위치 */
+  width: 800px;
+  height: 800px;
+  overflow: visible;
+  z-index: 2; /* ★ 포스터/프레임보다 위 */
+}
+/* 이미지 회전 애니메이션 */
+.spin-bg {
+  width: 100%;
+  height: 100%;
+  animation: spin 27s linear infinite; /* 10초에 한 바퀴, 무한 회전 */
+  transform-origin: center center; /* 중심 기준 회전 */
+}
+
+/* 시계방향 회전 */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.snoopy-body {
+  position: absolute;
+  width: 600px; /* 스누피 크기 조절 */
+  right: -110px; /* 중앙 정렬 */
+  top: 30%;
+  transform: translate(-50%, -45%); /* 살짝 위로 올림 */
+  z-index: 4; /* 노란 배경 위에 보이게 */
+}
+
+.hip {
+  position: absolute;
+  left: 28%; /* 엉덩이 위치: 필요시 미세조정 */
+  top: 62%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px; /* 디버깅용 기준 박스 */
+  pointer-events: none;
+  z-index: 3;
+  overflow: visible;
+  /* outline: 1px dashed rgba(0,0,0,.25);  // 위치 잡기용 가이드 */
+}
+
+/* 발 공통 — 위(발목)에 핀 고정: transform-origin을 위쪽 중앙으로 */
+.foot {
+  position: absolute;
+  left: 50%;
+  top: 0; /* 앵커 박스의 상단 중앙이 힌지 지점 */
+  transform: translateX(-50%); /* 좌우 정렬 보정 */
+  width: 200px;
+  pointer-events: none;
+  z-index: 3;
+
+  transform-origin: 50% 8%; /* ★ 윗부분을 회전축으로 (0~10% 사이에서 조정) */
+  animation: swing 0.85s ease-in-out infinite alternate;
+}
+
+.foot {
+  position: absolute;
+  left: 50%;
+  top: 0; /* 힙(앵커) 상단이 힌지 */
+  width: 200px;
+  pointer-events: none;
+  z-index: 3;
+  display: block;
+
+  /* ✅ 회전축을 발마다 다르게 줄 수 있게 변수화 */
+  transform-origin: var(--ox, 50%) var(--oy, 8%);
+
+  /* ✅ 흔들림 폭(각도) 변수: 필요 시 숫자만 바꿔서 튜닝 */
+  --amp: 20deg;
+
+  /* ✅ 새로고침 점프 방지: 0% 프레임과 '완전히 동일'한 초기 transform */
+  transform: translate(calc(-50% + var(--dx, 0px)), var(--dy, 0px))
+    rotate(calc(var(--base, 0deg) - var(--amp)));
+
+  /* ✅ alternate여도 시작/끝 상태 유지 */
+  animation: swing 0.85s ease-in-out infinite alternate;
+  animation-fill-mode: both;
+}
+
+/* 왼발 */
+.foot1 {
+  --ox: 20%; /* 회전축 X(작을수록 왼쪽) */
+  --oy: 8%; /* 회전축 Y(작을수록 위쪽) */
+  --dx: 0px; /* 가로 오프셋 */
+  --dy: -60px; /* 세로 오프셋 */
+  --base: 0deg; /* 기본 기울기 */
+}
+
+/* 오른발 (반 박자 어긋나게) */
+.foot2 {
+  --ox: 80%;
+  --oy: 8%;
+  --dx: 10px;
+  --dy: -60px;
+  --base: 0deg;
+  animation-delay: 0.425s; /* 🔁 교차 보행 느낌 (원래 2.7s → 권장값) */
+}
+
+/* 진자 스윙 */
+@keyframes swing {
+  0% {
+    transform: translate(calc(-50% + var(--dx)), var(--dy))
+      rotate(calc(var(--base) - var(--amp)));
+  }
+  100% {
+    transform: translate(calc(-50% + var(--dx)), var(--dy))
+      rotate(calc(var(--base) + var(--amp)));
+  }
+}
+.snoopybag {
+  position: absolute;
+  top: -20px;
+  right: 280px;
+  width: 180px;
+  height: auto;
+  z-index: 5;
+
+  /* 🔹 흔들리는 회전축 (왼쪽 위 쪽이 매달린 부분) */
+  transform-origin: 35% 35%; /* ← 이게 중요! 축을 묶인 끈 근처로 이동시킴 */
+
+  /* 🔹 살짝 흔들리는 애니메이션 */
+  animation: bagSwing 0.85s ease-in-out infinite alternate;
+}
+
+/* 🔹 가벼운 진자 모션 */
+@keyframes bagSwing {
+  0% {
+    transform: rotate(0deg); /* 왼쪽으로 살짝 */
+  }
+  100% {
+    transform: rotate(8deg); /* 오른쪽으로 살짝 */
+  }
+}
+.woodstock {
+  position: absolute;
+  /* ↓ 스누피/노란 원 기준 임의 위치: 필요시 수치만 조정해서 자리 잡아줘 */
+  left: 44%;
+  top: 63%;
+  transform: translate(-50%, -50%);
+  width: 120px; /* 우드스탁 전체 스케일 */
+  height: 120px;
+  z-index: 4; /* 스누피(2~3) 위/아래 상황에 맞게 조정 */
+  pointer-events: none;
+  overflow: visible;
+}
+
+/* 우드스탁 몸통(고정) */
+.wood-body {
+  position: absolute;
+  left: 130%;
+  top: 0%;
+  width: 130px; /* 몸통 크기 */
+  transform: translate(-50%, -50%); /* 중앙 정렬만, 애니메이션 없음(고정) */
+  image-rendering: auto;
+  z-index: 3;
+}
+.wood-hip {
+  position: absolute;
+  left: 52%; /* 엉덩이 위치 — 필요 시 미세조정 */
+  top: 76%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  pointer-events: none;
+  z-index: 2;
+  overflow: visible;
+}
+
+/* 🦶 공통 발 스타일 */
+.wood-foot {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 45px; /* 우드스탁 발 크기 */
+  transform: translateX(-50%);
+  transform-origin: 50% 10%; /* 발목 고정 */
+  pointer-events: none;
+  z-index: 2;
+  animation: woodSwing 0.8s ease-in-out infinite;
+}
+
+/* 좌/우 발 세부 조정 */
+.wood-foot1 {
+  --dx: 85px;
+  --dy: -15px;
+  --base: 20deg;
+  --amp: 40deg; /* 흔들림 폭 */
+  animation-delay: 0s; /* 왼발 먼저 */
+}
+.wood-foot2 {
+  --dx: 90px;
+  --dy: -15px;
+  --base: -18deg;
+  --amp: 30deg;
+  animation-delay: 0.5s; /* 반박자 어긋나게 */
+}
+
+/* 🔄 발 스윙 애니메이션 */
+@keyframes woodSwing {
+  0% {
+    transform: translate(calc(-50% + var(--dx)), var(--dy))
+      rotate(calc(var(--base) - var(--amp)));
+  }
+  50% {
+    transform: translate(calc(-50% + var(--dx)), var(--dy))
+      rotate(calc(var(--base) + var(--amp)));
+  }
+  100% {
+    transform: translate(calc(-50% + var(--dx)), var(--dy))
+      rotate(calc(var(--base) - var(--amp)));
+  }
+}
+.wood-tail {
+  position: absolute;
+  /* ↓ 몸통 기준 임의 좌표 — 필요시 숫자만 미세조정 */
+  right: -130px;
+  top: -10px;
+  width: 40px;
+
+  /* 축을 몸통 쪽(꼬리 기점)으로 맞추기 */
+  transform-origin: 20% 80%;
+
+  /* 기본 위치/각도 및 튜닝 변수 */
+  --dx: -3px; /* 좌우 미세 이동 */
+  --dy: -3px; /* 상하 기준 위치 */
+  --base: 15deg; /* 기본 기울기 */
+  --ampY: 6px; /* ↑↓ 흔들림 폭(픽셀) */
+  --ampR: 6deg; /* 회전 흔들림(선택) */
+
+  /* 위아래 + 살짝 회전 */
+  animation: tailWiggle 0.45s ease-in-out infinite;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* 위아래(translateY) + 살짝 회전 */
+@keyframes tailWiggle {
+  0% {
+    transform: translate(
+        calc(-50% + var(--dx)),
+        calc(-50% + var(--dy) - var(--ampY))
+      )
+      rotate(calc(var(--base) - var(--ampR)));
+  }
+  50% {
+    transform: translate(
+        calc(-50% + var(--dx)),
+        calc(-50% + var(--dy) + var(--ampY))
+      )
+      rotate(calc(var(--base) + var(--ampR)));
+  }
+  100% {
+    transform: translate(
+        calc(-50% + var(--dx)),
+        calc(-50% + var(--dy) - var(--ampY))
+      )
+      rotate(calc(var(--base) - var(--ampR)));
+  }
+}
+.shadow {
+  position: absolute;
+  height: 30px;
+  width: 530px;
+  right: -670px;
+  z-index: 1;
+  opacity: 0.6;
+  top: 65px;
+  border-radius: 50%;
+  animation: shadowStretch 1.7s ease-in-out infinite;
+  animation-delay: 0.85s;
+  transform-origin: center center; /* 중심 기준으로 늘어남 */
+}
+@keyframes shadowStretch {
+  0% {
+    transform: translateX(-50%) scaleX(1); /* 기본 크기 */
+  }
+  50% {
+    transform: translateX(-50%) scaleX(1.2); /* 오른쪽으로 20% 늘어남 */
+  }
+  100% {
+    transform: translateX(-50%) scaleX(1); /* 다시 원래로 */
+  }
+}
+.profile {
+  position: absolute;
+  top: 730px;
+  right: 700px;
+
+  /* ★ 추가: 가로 나열 & 간격 */
+  display: flex; /* ★ */
+  gap: 8px; /* ★ */
+  align-items: flex-end; /* ★ 카드 하단 정렬 */
+  overflow: visible; /* ★ 확대 시 잘림 방지 */
+  z-index: 60;
+}
+
+/* 모든 프로필 이미지 공통 스타일 */
+.profile img {
+  height: 200px; /* ★ 통일된 높이(px 단위 필수) */
+  width: auto;
+  object-fit: contain;
+
+  /* ★ 확대 애니메이션 */
+  transform-origin: center bottom;
+  transition: transform 0.25s ease, filter 0.25s ease;
+  will-change: transform;
+}
+
+/* ★ 호버 시 확대 */
+.profile img:hover {
+  transform: scale(1.3) rotate(5deg); /* 확대 15%, 시계방향 5도 회전 */
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25)); /* 살짝 그림자 강조 */
+  z-index: 1;
+}
+
+/* (선택) 키보드 포커스 접근성 */
+.profile img:focus-visible {
+  outline: 2px solid #002a91;
+  outline-offset: 2px;
+}
+.woodstockintro {
+  position: absolute;
+  /* 🔹 우드스탁 위치에 맞춰 조정 */
+  left: 62%; /* ← 가로 위치 */
+  top: 43%; /* ← 세로 위치 */
+  width: 200px; /* 🔹 크기 조절 */
+  height: auto;
+
+  z-index: 3; /* 🔹 우드스탁(4)보다 뒤, 노란 원(1~2)보다 앞 */
+  pointer-events: none; /* 클릭 등 방해 X */
+  opacity: 1; /* 불투명하게 표시 */
+}
+.snoopy-hat {
+  position: absolute;
+  left: 20%;
+  top: 10%;
+  width: 230px;
+  z-index: 4;
+  pointer-events: none;
+
+  transform-origin: 60% 90%;
+  /* ← 여기서 기본 기울기를 변수로 지정 */
+  --base: 15deg; /* 원하는 기본 기울기 값으로 바꾸세요 */
+
+  animation: hatWobble 1.2s ease-in-out infinite;
+}
+
+/* 좌우 흔들림(기본 각도에 ±8deg 가산) */
+@keyframes hatWobble {
+  0% {
+    transform: rotate(calc(var(--base) - 8deg));
+  }
+  50% {
+    transform: rotate(calc(var(--base) + 8deg));
+  }
+  100% {
+    transform: rotate(calc(var(--base) - 8deg));
+  }
+}
